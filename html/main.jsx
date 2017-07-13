@@ -6,27 +6,16 @@ var Link = window.ReactRouter.Link;
 class Signin extends React.Component {
   constructor(props) {
     super(props);
-
+    this.signIn = this.signIn.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.state = {
       email: '',
       password: ''
     };
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.signIn = this.signIn.bind(this);
   }
-
-  handleEmailChange(e) {
-    this.setState({email: e.target.value});
-  }
-
-  handlePasswordChange(e) {
-    this.setState({password: e.target.value});
-  }
-
   signIn() {
     axios.post('/signin', {
-      name: this.state.name,
       email: this.state.email,
       password: this.state.password
     }).then(function(response) {
@@ -35,26 +24,29 @@ class Signin extends React.Component {
       console.log(error);
     });
   }
-
+  handleEmailChange(e) {
+    this.setState({email: e.target.value})
+  }
+  handlePasswordChange(e) {
+    this.setState({password: e.target.value})
+  }
   render() {
     return (
       <div>
         <form className="form-signin">
           <h2 className="form-signin-heading">Please sign in</h2>
           <label htmlFor="inputEmail" className="sr-only">Email address</label>
-          <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" value={this.props.email} required autoFocus/>
-          <label htmlFor="inputPassword" className="sr-only">
-            Password
-          </label>
-          <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" value={this.props.password} required/>
-          <button className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button">
-            Sign in
-          </button>
+          <input type="email" onChange={this.handleEmailChange} id="inputEmail" className="form-control" placeholder="Email address" required autoFocus/>
+          <label htmlFor="inputPassword" className="sr-only">Password</label>
+          <input type="password" onChange={this.handlePasswordChange} id="inputPassword" className="form-control" placeholder="Password" required/>
+
+          <button className="btn btn-lg btn-primary btn-block" onClick={this.signIn} type="button">Sign in</button>
         </form>
         <div>
           <Link to="/signup">{'Signup'}</Link>
         </div>
       </div>
+
     )
   }
 }
@@ -62,33 +54,28 @@ class Signin extends React.Component {
 class Signup extends React.Component {
   constructor(props) {
     super(props);
-
+    this.signUp = this.signUp.bind(this);
+    this.handleNameChange = this.handleNameChange.bind(this);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.state = {
       name: '',
       email: '',
       password: ''
     };
-
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleEmailChange = this.handleEmailChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.signUp = this.signUp.bind(this);
   }
-
   handleNameChange(e) {
-    this.setState({ name: e.target.value });
+    this.setState({name: e.target.value})
   }
-
   handleEmailChange(e) {
-    this.setState({ name: e.target.value });
+    this.setState({email: e.target.value})
   }
-
   handlePasswordChange(e) {
-    this.setState({ name: e.target.value });
+    this.setState({password: e.target.value})
   }
-
   signUp() {
     axios.post('/signup', {
+      name: this.state.name,
       email: this.state.email,
       password: this.state.password
     }).then(function(response) {
@@ -112,9 +99,12 @@ class Signup extends React.Component {
 
           <button className="btn btn-lg btn-primary btn-block" onClick={this.signUp} type="button">Sign up</button>
         </form>
+        <div>
+          <Link to="/">{'Signin'}</Link>
+        </div>
       </div>
 
-    )
+    );
   }
 }
 
