@@ -1,7 +1,7 @@
 {
   "name": "react-node-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "Blog app",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
+    "express-session": "^1.15.3",
     "mongodb": "^2.2.30"
   }
 }

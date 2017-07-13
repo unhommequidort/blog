@@ -14,16 +14,20 @@ class Signin extends React.Component {
       password: ''
     };
   }
+
   signIn() {
     axios.post('/signin', {
       email: this.state.email,
       password: this.state.password
     }).then(function(response) {
-      console.log(response);
+      if (response.data == 'success') {
+        window.location.assign('http://localhost:7777/home')
+      }
     }).catch(function(error) {
       console.log(error);
     });
   }
+  
   handleEmailChange(e) {
     this.setState({email: e.target.value})
   }
